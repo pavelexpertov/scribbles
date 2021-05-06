@@ -5,16 +5,24 @@ import numpy as np
 # Setting default random generator
 rng = np.random.default_rng(12345)
 
-def get_square_matrix(m, n, random=False, integer=1):
+def get_square_matrix(n, random=False, integer=1):
     '''Return a square matrix with integer scalaras. Whether random or specified'''
-    if m != n:
-        raise ValueError(f"Rows and columns numbers don't match: {m} != {n}.")
 
     if random:
-        return rng.integers(50, size=(m, n))
+        return rng.integers(50, size=(n, n))
     else:
-        return np.ones((m, n), dtype=int) * integer
+        return np.ones((n, n), dtype=int) * integer
 
+def get_symmetrical_matrix(n):
+    '''Return a matrix that's symetrical'''
+    # Creating permutations of rows
+    current_integer_list = [i for i in range(1, n+1)]
+    permutations = []
+    while(current_integer_list[-1] != 1):
+        permutations.append(current_integer_list[:])
+        current_integer_list.pop()
+        current_integer_list.insert(0, current_integer_list[0] + 1)
+    return np.array(permutations)
 
 if __name__ == "__main__":
     # Square matrix
@@ -34,4 +42,4 @@ if __name__ == "__main__":
     print("Multiplication:\n", A * B)
     print("Division:\n", A / B)
     print("Keep in mind that it multiplies across elements, not dot products")
-
+    print("\n", get_symmetrical_matrix(5))
