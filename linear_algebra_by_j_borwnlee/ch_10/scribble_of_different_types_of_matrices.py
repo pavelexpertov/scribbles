@@ -42,7 +42,7 @@ def format_message_str(string):
     with some new lines at each end.
     '''
     string = string.strip()
-    return "\n".join(string.split(" "*4))
+    return "\n".join([line.strip() for line in string.split(" "*4)])
 
 if __name__ == "__main__":
     # Square matrix
