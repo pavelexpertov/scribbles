@@ -26,6 +26,15 @@ def get_symmetrical_matrix(n):
     permutations.append(current_integer_list[:])
     return np.array(permutations)
 
+def get_triangular_matrix(matrix, triangular_type):
+    '''Return a triangular matrix'''
+    if triangular_type == "triup":
+        return np.triu(matrix)
+    elif triangular_type == "trile":
+        return np.tril(matrix)
+    else:
+        raise ValueError("'tringular_type' is either wrong or empty.")
+
 def format_message_str(string):
     '''Return re-formated string for output messages.
 
@@ -65,7 +74,26 @@ if __name__ == "__main__":
     print("It has to be a square such that the values can be mirrored")
 
     # Triangular matrix
-    
+    m = """
+    Triangular matrix is a square matrix where a part of matrix
+    (in a shape of a 'square') has values on one side of diagonal
+    line and the other one has zeros.
+
+    Triangular matrix can be characterised by either 'triangular up' (scalar values above
+    diagonal line) and 'triangular down' (scalar values below diagonal line).
+
+    For example a 5x5 trinagular matrix would like this:
+    """
+    print(format_message_str(m))
+    m = get_square_matrix(5, random=True)
+    print(get_triangular_matrix(m, "trile"))
+    print("or this:")
+    print(get_triangular_matrix(m, "triup"))
+    m = """
+    Functions that can perform the formatting of these matrices are `numpy.tril`
+    and `numpy.triu`.
+    """
+    print(format_message_str(m))
     # Diagonal matrix
     # Identity matrix
     # Orthogonal matrix
