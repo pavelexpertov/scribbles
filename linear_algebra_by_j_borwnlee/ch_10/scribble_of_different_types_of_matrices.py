@@ -35,8 +35,21 @@ def get_triangular_matrix(matrix, triangular_type):
     else:
         raise ValueError("'tringular_type' is either wrong or empty.")
 
+def get_diagonal_matrix(diagonal_vector, extra_row=0, fill_value=0):
+    '''Return a diagonal matrix'''
+    rows = []
+    for index, value in enumerate(diagonal_vector):
+        row = [0]*len(diagonal_vector)
+        row[index] = value
+        rows.append(row)
+    counter = 0
+    while(counter < extra_row):
+        rows.append([fill_value]*len(diagonal_vector))
+        counter += 1
+    return np.array(rows)
+
 def format_message_str(string):
-    '''Return re-formated string for output messages.
+    '''Return re-formatted string for output messages.
 
     It's expected a docstring with 4 spaces that delimits sentences
     with some new lines at each end.
@@ -95,5 +108,18 @@ if __name__ == "__main__":
     """
     print(format_message_str(m))
     # Diagonal matrix
+    m = """
+    Diagonal matrix is a type of matrix that has values alongside a diagonal line.
+    This diagonal line is usually called a 'diagonal vector'. Usually scalar values
+    are line up diagonally and the rest tend to be 0's. For example:
+    """
+    print(format_message_str(m))
+    print(get_diagonal_matrix([3, 5, 68, 79, 666]))
+    m = """
+    Keep in mind that the matrix doesn't have to be a square matrix since the diagonal vector's
+    last value needs to reach at the last column of the column. For example.
+    """
+    print(format_message_str(m))
+    print(get_diagonal_matrix([3, 5, 68, 79, 666], 1))
     # Identity matrix
     # Orthogonal matrix
