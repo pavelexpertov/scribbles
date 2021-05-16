@@ -133,7 +133,24 @@ if __name__ == "__main__":
     diagonal_vector = np.diag(m)
     print(f"Using numpy.diag function will produce a vector of {diagonal_vector}")
     m = np.diag(diagonal_vector)
-    print(f"And providing the vector to the same function produces a matrix\n{m}")
+    print(f"And providing the vector to the same function produces a matrix like this:\n{m}")
 
     # Identity matrix
+    m = """
+    Identity matrix is a type of a square matrix where a diagonal line consists of 1's and the rest of vectors are 0's.
+    Special property of it is that its diagonal vectors are not
+    affected by **multiplication by a vector**.
+    To produce an identity matrix, the following functions can be used:
+    1. numpy.matlib.identity
+    2. numpy.identity
+    
+    For example, the following matrix can be produced using numpy.identity:
+    """
+    print(format_message_str(m))
+    m = np.identity(3)
+    print(m)
+    print("Then produce a different normal square matrix, like this:")
+    sq_m = get_square_matrix(3, True)
+    print(f"{sq_m}")
+    print(f"If you multiply the identity matrix with the square one, you get:\n{m * sq_m}")
     # Orthogonal matrix
