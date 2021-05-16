@@ -121,5 +121,19 @@ if __name__ == "__main__":
     """
     print(format_message_str(m))
     print(get_diagonal_matrix([3, 5, 68, 79, 666], 1))
+    m = """
+    There is a helper function called `numpy.diag`:
+    - if it takes a matrix, it will return a diagonal vector.
+    - if it takes a vector, it will return a matrix containing the provided diagonal vector.
+    For example:
+    """
+    print(format_message_str(m))
+    m = get_diagonal_matrix([v**2 for v in range(1, 4)])
+    print(f"Diagonal matrix as an example.\n{m}")
+    diagonal_vector = np.diag(m)
+    print(f"Using numpy.diag function will produce a vector of {diagonal_vector}")
+    m = np.diag(diagonal_vector)
+    print(f"And providing the vector to the same function produces a matrix\n{m}")
+
     # Identity matrix
     # Orthogonal matrix
