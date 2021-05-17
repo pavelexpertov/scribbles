@@ -138,8 +138,7 @@ if __name__ == "__main__":
     # Identity matrix
     m = """
     Identity matrix is a type of a square matrix where a diagonal line consists of 1's and the rest of vectors are 0's.
-    Special property of it is that its diagonal vectors are not
-    affected by **multiplication by a vector**.
+    Special property of it is "a vector doesn't change when multiplied by it".
     To produce an identity matrix, the following functions can be used:
     1. numpy.matlib.identity
     2. numpy.identity
@@ -153,4 +152,11 @@ if __name__ == "__main__":
     sq_m = get_square_matrix(3, True)
     print(f"{sq_m}")
     print(f"If you multiply the identity matrix with the square one, you get:\n{m * sq_m}")
+    print("As for seeing that a vector is not affected by multiplication with the identitiy vector")
+    vector = np.array([2, 3, 4, 5, 6])
+    print(f"You have vector of {vector}")
+    i = np.identity(5)
+    print(f"And then an identity matrix like below:\n{i}")
+    print(f"So if we do 'vector * i', then it's:\n {vector * i}")
+    print(f"So if we do 'vector @ i', then it's: {vector @ i}")
     # Orthogonal matrix
