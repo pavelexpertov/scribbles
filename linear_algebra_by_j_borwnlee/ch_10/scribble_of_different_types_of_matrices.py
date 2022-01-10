@@ -121,5 +121,42 @@ if __name__ == "__main__":
     """
     print(format_message_str(m))
     print(get_diagonal_matrix([3, 5, 68, 79, 666], 1))
+    m = """
+    There is a helper function called `numpy.diag`:
+    - if it takes a matrix, it will return a diagonal vector.
+    - if it takes a vector, it will return a matrix containing the provided diagonal vector.
+    For example:
+    """
+    print(format_message_str(m))
+    m = get_diagonal_matrix([v**2 for v in range(1, 4)])
+    print(f"Diagonal matrix as an example.\n{m}")
+    diagonal_vector = np.diag(m)
+    print(f"Using numpy.diag function will produce a vector of {diagonal_vector}")
+    m = np.diag(diagonal_vector)
+    print(f"And providing the vector to the same function produces a matrix like this:\n{m}")
+
     # Identity matrix
+    m = """
+    Identity matrix is a type of a square matrix where a diagonal line consists of 1's and the rest of vectors are 0's.
+    Special property of it is "a vector doesn't change when multiplied by it".
+    To produce an identity matrix, the following functions can be used:
+    1. numpy.matlib.identity
+    2. numpy.identity
+    
+    For example, the following matrix can be produced using numpy.identity:
+    """
+    print(format_message_str(m))
+    m = np.identity(3)
+    print(m)
+    print("Then produce a different normal square matrix, like this:")
+    sq_m = get_square_matrix(3, True)
+    print(f"{sq_m}")
+    print(f"If you multiply the identity matrix with the square one, you get:\n{m * sq_m}")
+    print("As for seeing that a vector is not affected by multiplication with the identitiy vector")
+    vector = np.array([2, 3, 4, 5, 6])
+    print(f"You have vector of {vector}")
+    i = np.identity(5)
+    print(f"And then an identity matrix like below:\n{i}")
+    print(f"So if we do 'vector * i', then it's:\n {vector * i}")
+    print(f"So if we do 'vector @ i', then it's: {vector @ i}")
     # Orthogonal matrix
