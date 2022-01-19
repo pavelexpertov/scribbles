@@ -1,0 +1,39 @@
+# Behaviour from applicative-order interpreter
+The applicative ordered evaluation rule will evaluate each sub-expression in (test 0 (p)). This is because it follows a rule of evaluating each sub-expression and then another rule of applying evaluated operands to its operator.
+
+So, the interpreter will evaluate `test` and get its implementation back. Then it will move onto next sub-expression of 0, which is just a primitive zero number, and evaluate last sub-expression of (p).
+
+However, due to (p) being parenthesised, the rule of evaluating sub-expressions will start for it because the brackets indicate a combination. Thus, the rule itself has a recursive nature where it will invoke itself upon sub-expressions that are combinations.
+
+The interpreter will return `p` (as in an abstract function,
+but let's pretend it's just a character) and then it will
+apply operands to the operator by replacing formal parameters
+with the operand values in `test` implementation.
+
+Then the `if` special form will be evaluate to bring its
+implementation and then the interpreter will evaluate the
+predicate first (by bringing `=` operator and then evaluating
+operands) and then will return y due to False value.
+
+# Behaviour from normal-order interpreter
+The interpreter's behaviour will expand an expression by
+substituting compound procedures (i.e. operators) until it
+reaches an expression containing only primitive operators
+and then evaluate operands in the expanded expression.
+
+For example, (test 0 (p)) will evaluate to
+(if (= 0 0) 0 (p)) where the formal parameters get replaced
+by actual arguments of `0` and `(p)`.
+
+The normal order evaluation will evaluate every compound
+operators in an expression until it expands the expression
+fully that only contain primitive operators. Then, it will
+proceed evaluating operands and thus reducing the expanded
+expression. In comparison to the applicative-order, it
+doesn't not evaluate each sub-expression individually. In
+fact, it doesn't even evaluate its operands each time it
+evaluates an operator and performs formal parameter
+substitution, whereas the applicative-order would evaluate
+every operator and operands and, perhaps,
+perform evaluation, in a recursive manner, inside a
+combination if it happened to be an operand.

@@ -1,0 +1,4 @@
+The behaviour of the following procedure is that it returns 'plus' or 'minus' operator if `b` argument is bigger than 0.
+If the condition is met, 'plus' operator is returned and then arguments a b get applied to the returned operator. Otherwise, 'minus' operator is returned and the operands of `a` and `b` get applied to it.
+So if b is more than 0, get a sum from a and b.
+Otherwise, get a difference by taking away b from a.
