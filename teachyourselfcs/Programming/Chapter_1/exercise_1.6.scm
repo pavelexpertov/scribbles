@@ -30,4 +30,6 @@
 		               x)))
 ;Ok, the answer for the exercise is (sqrt-iter (improve guess x) x) will get evaluated
 ;*endlessly* by calling sqrt-iter procedure (endlessly).
-; I don't get why I doon't get maximum recursion error when it spits 23 is not an applicable object.
+; I don't get why I don't get maximum recursion error when it spits 23 is not an applicable object.
+; Update: just reinstalled my OS on my desktop and now I get the specific error.
+; Still don't get it how I didn't get the recursion error in the first place
