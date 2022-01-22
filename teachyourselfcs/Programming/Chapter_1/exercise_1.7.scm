@@ -19,6 +19,11 @@
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
+(define (multiply-tens n)
+		  (if (> n 0)
+			  (* 10 (multiply-tens (- n 1)))
+              1))
+
 ;This is output from performing the square root calculation:
 ;1 ]=> (sqrt 0.001)
 
