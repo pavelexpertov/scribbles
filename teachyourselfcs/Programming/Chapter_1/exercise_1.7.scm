@@ -13,6 +13,9 @@
 (define (good-enough? guess x)
   (< (abs (- (square guess) x)) 0.001))
 
+(define (square x)
+		(* x x))
+
 (define (sqrt x)
   (sqrt-iter 1.0 x))
 
@@ -21,82 +24,116 @@
 			  (* 10 (multiply-tens (- n 1)))
               1))
 
-;This is output from performing the square root calculation on a tiny number:
-;1 ]=> (sqrt 0.001)
+(define (multiply-tenth n)
+        (if (> n 0)
+            (* 0.1 (multiply-tenth (- n 1)))
+            1))
+
+
+;Ok, so the exercise said that the good-enough? test is not very
+;effective at finding square roots of very small numbers.
+;This is because inside the compound combination, the procedure uses a
+;number of `0.001` when it calculates a difference between a squared
+;guess and radicand and the number is limiting that, given enough
+;guessed iterations, will prevent the procedure from calculating further
+;due to satisfied condition of comparing between the difference and the number.
+
+; Look at the examples below:
+;-----------------------------------
+1 ]=> (sqrt (multiply-tenth 6))
+
+;Value: 3.1260655525445276e-2
+
+1 ]=> (sqrt (multiply-tenth 7))
+
+;Value: .03125106561775382
+
+1 ]=> (sqrt (multiply-tenth 8))
+
+;Value: .03125010656242753
+;-----------------------------------
+It can be observed that the change in decimal value (100 thousandth place)
+doesn't change because it procedure's condition will be satisfied
+(i.e. 0.03125010656242753^2 - 0.000000001 < 0.001).
+However, the calculator will show that:
+square root of 0.00000001 will be 0.0001 and square root of 0.000000001
+will be 0.000031623. The decimal value is not wrong but it's the decimal
+places that the good-enough? test couldn't 
+
+
+;As for very large numbers, the good-enough? test will not suffice because
+;when calculating differences between squared guess and the radicand, the
+;condition that tests for closeness of both numbers doesn't get satisfied
+;because the differences are very.
+;If you look below, 
+
+
+; Output for testing large numbers
+
+1 ]=> (sqrt (multiply-tens 8))
+
+;Value: 10000.
+
+1 ]=> (sqrt (multiply-tens 9))
+
+;Value: 31622.776601684047
+
+1 ]=> (sqrt (multiply-tens 10))
+
+;Value: 100000.
+
+1 ]=> (sqrt (multiply-tens 11))
+
+;Value: 316227.7660168379
+
+1 ]=> (sqrt (multiply-tens 12))
+
+;Value: 1000000.
+
+1 ]=> (sqrt (multiply-tens 13))
+
+
+
+; Output for testing small numbers
+
+1 ]=> (sqrt (multiply-tenth 1))
+
+;Value: .316245562280389
+
+1 ]=> (sqrt (multiply-tenth 2))
+
+;Value: .10032578510960607
+
+1 ]=> (sqrt (multiply-tenth 3))
 
 ;Value: .04124542607499115
 
-;1 ]=> (sqrt 0.00001)
+1 ]=> (sqrt (multiply-tenth 4))
+
+;Value: .03230844833048122
+
+1 ]=> (sqrt (multiply-tenth 5))
 
 ;Value: .03135649010771716
 
-;1 ]=> (sqrt 0.000000001)
+1 ]=> (sqrt (multiply-tenth 6))
+
+;Value: 3.1260655525445276e-2
+
+1 ]=> (sqrt (multiply-tenth 7))
+
+;Value: .03125106561775382
+
+1 ]=> (sqrt (multiply-tenth 8))
+
+;Value: .03125010656242753
+
+1 ]=> (sqrt (multiply-tenth 9))
 
 ;Value: .03125001065624928
 
-;1 ]=> (sqrt 0.0000000000000001)
+1 ]=> (sqrt (multiply-tenth 10))
 
-;Value: .03125000000000106
-
-;1 ]=> (sqrt 0.00000000000000000000001)
-
-;Value: .03125
-
-;1 ]=> (sqrt 0.0000000000000000000000000001)
-
-;Value: .03125
-
-;1 ]=> (sqrt-iter 0.1 0.001)
-
-;Value: .03659090909090909
-
-;1 ]=> (sqrt-iter 0.1 0.00001)
-
-;Value: .0251249000999001
-
-;1 ]=> (sqrt-iter 0.1 0.000000001)
-
-;Value: .025000012499999
-
-;1 ]=> (sqrt-iter 0.1 0.0000000000000001)
-
-;Value: .02500000000000125
-
-;1 ]=> (sqrt 0.1 0.00000000000000000000001)
-
-;1 ]=> (sqrt-iter 0.1 0.00000000000000000000001)
-
-;Value: .025
-
-;]=> (sqrt-iter 0.1 0.0000000000000000000000000001)
-
-;Value: .025
-
-Ok, so the exercise said that the good-enough? test is not very
-effective at finding square roots of very small numbers.
-This is because inside the compound combination, the procedure uses a
-number of `0.001` when it calculates a difference between a squared
-guess and radicand and the number is limiting that, given enough
-guessed iterations, will prevent the procedure from calculating further
-due to satisfied condition of comparing between the difference and the number.
-For example, for finding square of `0.001`, the function can
-produce a plausible square root whereas finding square root for
-`0.00001` will show inaccuracy in terms of an incorrect number
-of decimal places within the calculated root. This same calculation can
-be observed for even tinier numbers than the mentioned one.
-As for the big
-
-
-; This is output for the large numbers
-
-;1 ]=> (sqrt 9999999999999999)
-
-;Value: 100000000.
-
-;1 ]=> (sqrt 99999999999)
-
-;Value: 316227.76601525676
-
-;1 ]=> (sqrt 99999999999999999)
+;Value: .03125000106562499
 
 
